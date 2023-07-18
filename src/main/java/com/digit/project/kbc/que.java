@@ -9,16 +9,16 @@ public class que {
 	};
 	
 	static String[][] opts = new String[][] {
-		{"India","Australia","Dubai","Iran"},
-		{"Chicken","Peacock","Pegion","Duck"},
-		{"Red","White","Blue","Yellow"},
-		{"Narendra Modi","Dibya kumar","Ujjwal","Sajal"},
-		{"N2O","CH4","NH3","H2O"},
-		{"Banana","Lichi","Mango","Apple"},
-		{"Elephant","Tiger","Lion","Fox"},
-		{"2001","2018","2020","2008"},
-		{"Royal challengers Banglore","Royal chance Bhutan ","Rabel Chalengers Bengaluru","Red Color Blood"},
-		{"13","4","1","None"}
+		{"India","Australia","Dubai","Iran","lifeline"},
+		{"Chicken","Peacock","Pegion","Duck","lifeline"},
+		{"Red","White","Blue","Yellow","lifeline"},
+		{"Narendra Modi","Dibya kumar","Ujjwal","Sajal","lifeline"},
+		{"N2O","CH4","NH3","H2O","lifeline"},
+		{"Banana","Lichi","Mango","Apple","lifeline"},
+		{"Elephant","Tiger","Lion","Fox","lifeline"},
+		{"2001","2018","2020","2008","lifeline"},
+		{"Royal challengers Banglore","Royal chance Bhutan ","Rabel Chalengers Bengaluru","Red Color Blood","lifeline"},
+		{"13","4","1","None","lifeline"}
 	};
 	
 	static int[] ans = new int[] {1,2,3,1,4,3,2,4,1,4};

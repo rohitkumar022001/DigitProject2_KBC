@@ -7,7 +7,8 @@ import java.lang.Math;
 public class check extends que {
 	Scanner sc = new Scanner(System.in);
 	que qn = new que();
-	String ll;
+	int ll;
+	String m;
 	int f = 1;
 	int a = 1;
 	int clf = 2;
@@ -19,10 +20,14 @@ public class check extends que {
 
 	void choose() {
 		if (clf == 0) {
-			System.out.println("\nNO LIFE LINE");
+			System.out.println("\nNO LIFE LINE REMAINING ");
 			System.out.println("\nEnter your answer");
 			option = sc.nextInt();
-			check_ans(option);
+			if (option == 5) {
+				choose();
+			} else {
+				check_ans(option);
+			}
 		}
 		System.out.println("\nAvialable LIFE-LINES :\n");
 		if (f == 1 && a == 1) {
@@ -36,14 +41,15 @@ public class check extends que {
 			} else {
 				clf--;
 				a--;
+
 				ap();
 			}
 		} else if (f == 0) {
 
 			System.out.println("\n2. Audience Poll");
 			System.out.println("\nLife line ? Y/N");
-			ll = sc.next();
-			if (ll.equalsIgnoreCase("y")) {
+			m = sc.next();
+			if (m.equalsIgnoreCase("y")) {
 				clf--;
 				System.out.println("\nEnter your choice -->");
 				ip = sc.nextInt();
@@ -59,8 +65,8 @@ public class check extends que {
 
 			System.out.println("\n1. 50-50");
 			System.out.println("\nLife line ? Y/N");
-			ll = sc.next();
-			if (ll.equalsIgnoreCase("y")) {
+			m = sc.next();
+			if (m.equalsIgnoreCase("y")) {
 				clf--;
 				System.out.println("\nEnter your choice -->");
 				ip = sc.nextInt();
@@ -75,51 +81,68 @@ public class check extends que {
 	}
 
 	void ff() {
+		if (ip != 1) {
+			System.out.println("\nInvalid input");
+			System.out.println("\nPlease enter the given choice");
+			ip = sc.nextInt();
+		}
 		System.out.println("\nYou have choosen 50-50");
 		System.out.println("\nQ" + (count_que) + ". " + qn.qs[count_que - 1] + "\n");
 		System.out.println((que.ans[count_que - 1]) + ". " + opts[count_que - 1][que.ans[count_que - 1] - 1]);// right
 																												// answer
-		System.out.println((5 - que.ans[count_que - 1]) + ". " + opts[count_que - 1][4-que.ans[count_que - 1]]);// wrong
-																														// answer
-		choose();
+		System.out.println((5 - que.ans[count_que - 1]) + ". " + opts[count_que - 1][4 - que.ans[count_que - 1]]);// wrong
+		System.out.println("5. lifeline");
+		System.out.println("\nEnter your answer");
+		option = sc.nextInt();// answer
+		if (option == 5) {
+			choose();
+		} else {
+
+			check_ans(option);
+		}
 
 	}
 
 	void ap() {
+		if (ip != 2) {
+			System.out.println("\nInvalid input");
+			System.out.println("\nPlease enter the given choice");
+			ip = sc.nextInt();
+		}
 		System.out.println("\nYou have choosen Audiance poll");
 		Random random = new Random();
 		int totalVotes = 100; // Total number of audience votes
 
 		// Generate random percentage for each option
-		int[] percentages = new int[opts[count_que - 1].length];
+		int[] percentages = new int[opts[count_que - 1].length - 1];
 		int remainingPercentage = 100;
 		int max = -1;
-		for (int i = 0; i < opts[count_que - 1].length - 1; i++) {
+		for (int i = 0; i < opts[count_que - 1].length - 2; i++) {
 			int percentage = random.nextInt(remainingPercentage);
 			percentages[i] = percentage;
 			remainingPercentage -= percentage;
 			max = Math.max(percentages[i], max);
 		}
 
-		percentages[opts[count_que - 1].length - 1] = remainingPercentage;
-		max = Math.max(percentages[opts[count_que - 1].length - 1], max);
-		//System.out.println("max - " + max);
+		percentages[opts[count_que - 1].length - 2] = remainingPercentage;
+		max = Math.max(percentages[opts[count_que - 1].length - 2], max);
+		// System.out.println("max - " + max);
 		// Display the audience poll results
 		int x = -1;
 		int temp;
-		//System.out.println("Audience Poll Results:");
-		for (int i = 0; i < opts[count_que - 1].length; i++) {
+		// System.out.println("Audience Poll Results:");
+		for (int i = 0; i < opts[count_que - 1].length - 1; i++) {
 			if (percentages[i] == max) {
 				x = i;
 			}
-			//System.out.println((i + 1) + ": " + percentages[i] + "%");
+			// System.out.println((i + 1) + ": " + percentages[i] + "%");
 		}
-		//System.out.println("max - index " + (x + 1));
+		// System.out.println("max - index " + (x + 1));
 		temp = percentages[x];
 		percentages[x] = percentages[que.ans[count_que - 1] - 1];
 		percentages[que.ans[count_que - 1] - 1] = temp;
-		//System.out.println("Audience Poll Results: after");
-		for (int i = 0; i < opts[count_que - 1].length; i++) {
+		// System.out.println("Audience Poll Results: after");
+		for (int i = 0; i < opts[count_que - 1].length - 1; i++) {
 
 			System.out.println((i + 1) + ": " + percentages[i] + "%");
 		}
@@ -128,7 +151,14 @@ public class check extends que {
 		for (int i = 0; i < opts[count_que - 1].length; i++) {
 			System.out.println((i + 1) + ". " + opts[count_que - 1][i]);
 		}
-		choose();
+		System.out.println("\nEnter your answer");
+		option = sc.nextInt();// answer
+		if (option == 5) {
+			choose();
+		} else {
+
+			check_ans(option);
+		}
 
 	}
 
@@ -162,15 +192,22 @@ public class check extends que {
 		for (int i = 0; i < opts[count_que - 1].length; i++) {
 			System.out.println((i + 1) + ". " + opts[count_que - 1][i]);
 		}
-
-		System.out.println("\nLife line ? Y/N");
-		ll = sc.next();
-
-		if (ll.equalsIgnoreCase("y")) {
-			choose();
-		} else {
+		if (clf != 0) {
+			// System.out.println("\nLife line ? Y/N");
+			// ll = sc.nextInt();
 			System.out.println("\nEnter your answer");
 			option = sc.nextInt();
+		} else {
+
+			System.out.println("\nEnter your answer");
+			option = sc.nextInt();
+		}
+
+		if (option == 5) {
+			choose();
+		} else {
+			// System.out.println("\nEnter your answer");
+			// option = sc.nextInt();
 			check_ans(option);
 		}
 	}
